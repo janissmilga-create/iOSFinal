@@ -1,0 +1,39 @@
+name: Final Android Task
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        description: 'Choose the test suite to run'
+        required: true
+        default: 'NewEventTests'
+        type: choice
+        options:
+          - NewCalendarTests
+          - NewEventTests
+
+jobs:
+  run-tests:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v5.1
+
+      - name: Run tests
+        run: mvn test -DtestSuite=${{ inputs.test_suite }}.xml
+
+      - name: Upload allure reports as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Upload screenshots as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots
