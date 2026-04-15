@@ -28,7 +28,7 @@ public class NewEventScreen {
     private RemoteWebElement addButton;
     @iOSXCUITFindBy(accessibility = "BackButton")
     private RemoteWebElement backButton;
-    @iOSXCUITFindBy(accessibility = "Wednesday, April 15")
+    @iOSXCUITFindBy(accessibility = "Saturday, April 11")
     private RemoteWebElement eventDate;
 
 
@@ -50,7 +50,7 @@ public class NewEventScreen {
     @Step("Change date and time")
     public void changeDateAndTime(){
         startDateSelector.click();
-        WebElement start = driver.findElement(AppiumBy.accessibilityId("15"));
+        WebElement start = driver.findElement(AppiumBy.accessibilityId("11"));
         start.click();
 
         WebElement startCell = driver.findElement(
@@ -64,7 +64,7 @@ public class NewEventScreen {
         minuteWheel.sendKeys("30");
 
         endDateSelector.click();
-        WebElement end = driver.findElement(AppiumBy.accessibilityId("16"));
+        WebElement end = driver.findElement(AppiumBy.accessibilityId("12"));
         end.click();
 
         WebElement endCell = driver.findElement(
@@ -107,6 +107,6 @@ public class NewEventScreen {
         WebElement dateCell = new WebDriverWait(driver, GlobalVariables.globalTimeout)
                 .until(ExpectedConditions.visibilityOf(eventDate));
 
-        return dateCell.getAttribute("value"); // or "label" depending on your app
+        return dateCell.getAttribute("value");
     }
 }
