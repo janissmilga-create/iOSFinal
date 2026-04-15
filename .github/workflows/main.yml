@@ -6,11 +6,11 @@ on:
       test_suite:
         description: 'Choose the test suite to run'
         required: true
-        default: 'NewEventTests'
+        default: 'NewEventTest'
         type: choice
         options:
-          - NewCalendarTests
-          - NewEventTests
+          - NewCalendarTest
+          - NewEventTest
 
 jobs:
   run-tests:
