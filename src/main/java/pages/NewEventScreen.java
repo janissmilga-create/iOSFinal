@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.GlobalVariables;
 
+import java.time.Duration;
+
 public class NewEventScreen {
 
     protected IOSDriver driver;
@@ -44,12 +46,16 @@ public class NewEventScreen {
 
     @Step("Entering event title: {0}")
     public void enterEventTitle(String eventTitle) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         titleTextField.clear();
         titleTextField.sendKeys(eventTitle);
     }
     @Step("Change date and time")
     public void changeDateAndTime(){
-        startDateSelector.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(startDateSelector)).click();
         WebElement start = driver.findElement(AppiumBy.accessibilityId("11"));
         start.click();
 
@@ -63,7 +69,7 @@ public class NewEventScreen {
         WebElement minuteWheel = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypePickerWheel[2]"));
         minuteWheel.sendKeys("30");
 
-        endDateSelector.click();
+        wait.until(ExpectedConditions.elementToBeClickable(endDateSelector)).click();
         WebElement end = driver.findElement(AppiumBy.accessibilityId("12"));
         end.click();
 
@@ -79,16 +85,20 @@ public class NewEventScreen {
     }
     @Step("Set travel time")
     public void setTravelTime(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         WebElement travelTimeButton = driver.findElement(AppiumBy.accessibilityId("Travel Time"));
-        travelTimeButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(travelTimeButton)).click();
 
         WebElement travelTime30 = driver.findElement(AppiumBy.accessibilityId("tavel-time-menu-option:30 minutes"));
-        travelTime30.click();
+        wait.until(ExpectedConditions.elementToBeClickable(travelTime30)).click();
     }
     @Step("Set to all day")
     public void setToAllDay(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         WebElement allDayButton = driver.findElement(AppiumBy.accessibilityId("all-day-switch"));
-        allDayButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(allDayButton)).click();
     }
 
     @Step("Time not shown")
@@ -99,8 +109,10 @@ public class NewEventScreen {
     }
     @Step("Confirm choices")
     public void confirmChoices(){
-        addButton.click();
-        backButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(addButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(backButton)).click();
     }
     @Step("Event is added")
     public String getDateCellValue() {

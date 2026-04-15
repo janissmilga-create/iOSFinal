@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.GlobalVariables;
 
+import java.time.Duration;
+
 public class NewCalendar {
     protected IOSDriver driver;
     public NewCalendar(IOSDriver driver) {
@@ -48,20 +50,26 @@ public class NewCalendar {
 
     @Step("Open calendars")
     public void openCalendars(){
-        calendarsButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(calendarsButton)).click();
+
     }
     @Step("Add new calendar")
     public void addNewCalendar(){
-        addCalendar.click();
-        addCalendarMenuButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(addCalendar)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(addCalendarMenuButton)).click();
     }
     @Step("Adjust calendar")
     public void adjustCalendar(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         calendarTitleField.sendKeys("My new Calendar");
-        calendarColor.click();
-        blueColor.click();
-        backButton.click();
-        doneButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(calendarColor)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(blueColor)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(backButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(doneButton)).click();
     }
     @Step("New calendar is added")
     public boolean newCalendarAdded() {
@@ -77,8 +85,10 @@ public class NewCalendar {
     }
     @Step("Delete calendar")
     public void deleteNewCalendar() throws InterruptedException {
-        infoButton.click();
-        deleteCalendar.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(infoButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(deleteCalendar)).click();
         Thread.sleep(5000);
     }
     @Step("Calendar is deleted")
@@ -89,7 +99,9 @@ public class NewCalendar {
     }
     @Step("Close calendar")
     public void closeCalendar(){
-        closeButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(closeButton)).click();
     }
 
 }
